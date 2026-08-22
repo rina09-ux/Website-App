@@ -1,0 +1,5 @@
+{
+  "name": "NusaSec — Post-Quantum & Cloud Posture Intelligence",
+  "description": "Enterprise unified security intelligence, multi-cloud posture management (CSPM), attack path graphs, continuous compliance (OJK POJK 11, UU PDP, ISO 27001, SOC 2), and post-quantum cryptography agility (NIST FIPS 203/204).",
+  "capabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
