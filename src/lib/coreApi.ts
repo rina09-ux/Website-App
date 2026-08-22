@@ -61,6 +61,25 @@ async function request<T>(path: string, init: RequestInit = {}): Promise<T> {
   return body as T;
 }
 
+async function requestTestData<T>(path: string): Promise<T> {
+  const response = await fetch(`${NUSASEC_PLATFORM.testCoreApiUrl}${path}`, {
+    credentials: 'include',
+    headers: {
+      Accept: 'application/json',
+      'Content-Type': 'application/json',
+    },
+  });
+
+  const body = await response.json().catch(() => ({}));
+  if (!response.ok) {
+    const message = typeof body?.detail === 'string'
+      ? body.detail
+      : `NusaSec-Core TEST request failed (${response.status})`;
+    throw new Error(message);
+  }
+  return body as T;
+}
+
 export function login(email: string, password: string): Promise<LoginResult> {
   return request<LoginResult>('/api/v1/auth/login', {
     method: 'POST',
@@ -100,5 +119,5 @@ export function verifyMfa(
 }
 
 export function getPublicJson<T>(path: string): Promise<T> {
-  return request<T>(`/api/v1/public${path}`);
+  return requestTestData<T>(`/api/v1/public${path}`);
 }
